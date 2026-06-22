@@ -11,8 +11,11 @@
 **a. Initial design**
 
 - Briefly describe your initial UML design.
-- What classes did you include, and what responsibilities did you assign to each?
+--> my initial UML design 4 core classes. pet, owner, task and schedule.
 
+The Owner class manages pet information. The Pet class stores details about each pet. The Task class stores pet care tasks, including the task name, duration, and priority. The Scheduler class organizes tasks and creates a daily schedule.
+
+- What classes did you include, and what responsibilities did you assign to each?
 -->
 
 **Owner**
