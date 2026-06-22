@@ -112,3 +112,6 @@ PawPal+ does more than list your tasks — it organizes the day for you:
 4. Add a few more tasks — they appear in the Current tasks table, already sorted by time.
 5. Use the pet/status filters to narrow the view (e.g. just Mochi's pending tasks).
 6. Set the day to "Monday" and click Generate schedule to see today's ordered plan, conflict check, and reasoning.
+
+
+![Project 2 Demo](Project%202%20Demo.png)
