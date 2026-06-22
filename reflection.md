@@ -2,10 +2,39 @@
 
 ## 1. System Design
 
+**Core Actions**
+
+- Add and manage pets
+- Add and manage tasks (feedings, walks, medications, appointments)
+- View today's schedule or upcoming tasks
+
 **a. Initial design**
 
 - Briefly describe your initial UML design.
 - What classes did you include, and what responsibilities did you assign to each?
+
+-->
+
+**Owner**
+- Attributes: owner_name (string), pet_names (list of string)
+- Methods: add_owner(), edit_owner(), delete_owner(), add_pet(pet_name)
+- Responsibility: represents the person and the pets registered under them.
+
+**Pet**
+- Attributes: pet_name (string), owner_name (string)
+- Methods: add_pet(), edit_pet(), delete_pet()
+- Responsibility: represents an individual animal and links back to its owner.
+
+**Task**
+- Attributes: task_name (string), pet_name (string), duration (int, minutes), priority (string: low / medium / high)
+- Methods: add_task(), set_duration_and_priority(), edit_task(), delete_task(), display_tasks_for_day(day)
+- Responsibility: represents a single unit of pet care work and its scheduling details.
+
+**Scheduler**
+- Attributes: tasks (list of Task), pet_name (string)
+- Methods: generate_schedule(), display_schedule()
+- Responsibility: orders and times the tasks into a daily plan and displays it.
+
 
 **b. Design changes**
 
