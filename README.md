@@ -68,6 +68,19 @@ Sample test output:
 
 ```
 # Paste your pytest output here
+
+======================================== test session starts =========================================
+platform darwin -- Python 3.13.13, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/zuhaibv/Documents/gits/ai110-module2show-pawpal-starter
+plugins: anyio-4.14.0
+collected 17 items                                                                                                 
+
+tests/test_pawpal.py .................                                                       [100%]
+
+========================================= 17 passed in 0.02s =========================================
+
+Confidence Level: ⭐⭐⭐⭐⭐ (5/5 Stars)
+
 ```
 
 ## 📐 Smarter Scheduling
