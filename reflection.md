@@ -78,13 +78,15 @@ I also added start_time and recurrence fields to Task so the system can support 
 **a. How you used AI**
 
 - How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
+--> AI was used in: UML Design, Testing, UI Integration and writing code.
+
 - What kinds of prompts or questions were most helpful?
+--> "Based on my skeleton, how should the Scheduler retrieve tasks from the Owner?"
 
 **b. Judgment and verification**
 
 - Describe one moment where you did not accept an AI suggestion as-is.
-- How did you evaluate or verify what the AI suggested?
-
+--> rejected preference as a class
 ---
 
 ## 4. Testing and Verification
@@ -92,13 +94,15 @@ I also added start_time and recurrence fields to Task so the system can support 
 **a. What you tested**
 
 - What behaviors did you test?
+--> I tested sorting , recurring tasks , and conflict detection.
+
 - Why were these tests important?
+--> These are the core jobs of the scheduler, so if any of them break the daily plan would be wrong or misleading. Testing them makes sure the app can be trusted.
 
 **b. Confidence**
 
 - How confident are you that your scheduler works correctly?
-- What edge cases would you test next if you had more time?
-
+--> ⭐⭐⭐⭐⭐ (5/5 Stars)
 ---
 
 ## 5. Reflection

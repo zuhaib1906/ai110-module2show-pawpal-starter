@@ -96,22 +96,52 @@ if st.button("Add task"):
             )
         )
 
-# Show every task across all pets via Owner.all_tasks().
-all_tasks = owner.all_tasks()
-if all_tasks:
-    st.write("Current tasks:")
-    st.table(
-        [
-            {
-                "task": t.task_name,
-                "pet": t.pet_name,
-                "duration_minutes": t.duration,
-                "priority": t.priority,
-                "start_time": t.start_time or "--",
-            }
-            for t in all_tasks
-        ]
+# Show every task across all pets, sorted and filtered via the Scheduler.
+scheduler = Scheduler(owner)
+
+if owner.all_tasks():
+    st.write("Current tasks")
+
+    # Filter controls — feed straight into Scheduler.filter_tasks().
+    fcol1, fcol2 = st.columns(2)
+    with fcol1:
+        pet_filter = st.selectbox(
+            "Filter by pet", ["All pets"] + [pet.pet_name for pet in owner.pets]
+        )
+    with fcol2:
+        status_filter = st.selectbox("Filter by status", ["all", "pending", "completed"])
+
+    filtered = scheduler.filter_tasks(
+        owner.all_tasks(),
+        pet_name=None if pet_filter == "All pets" else pet_filter,
+        status=status_filter,
     )
+    filtered = scheduler.sort_by_time(filtered)
+
+    if filtered:
+        # Summary metrics give the table a polished, dashboard-style header.
+        total_minutes = sum(t.duration for t in filtered)
+        done_count = sum(1 for t in filtered if t.completed)
+        mcol1, mcol2, mcol3 = st.columns(3)
+        mcol1.metric("Tasks", len(filtered))
+        mcol2.metric("Total time", f"{total_minutes} min")
+        mcol3.metric("Completed", f"{done_count}/{len(filtered)}")
+
+        st.table(
+            [
+                {
+                    "✓": "✅" if t.completed else "⏳",
+                    "Start": t.start_time or "--",
+                    "Task": t.task_name,
+                    "Pet": t.pet_name,
+                    "Duration": f"{t.duration} min",
+                    "Priority": t.priority.capitalize(),
+                }
+                for t in filtered
+            ]
+        )
+    else:
+        st.info("No tasks match the current filters.")
 else:
     st.info("No tasks yet. Add one above.")
 
@@ -123,16 +153,35 @@ st.caption("Generates a daily plan from all tasks, sorted by start time.")
 day = st.text_input("Day", value="Monday")
 
 if st.button("Generate schedule"):
-    scheduler = Scheduler(owner)
     scheduled = scheduler.generate_schedule(day)
     if not scheduled:
         st.info("No tasks to schedule yet.")
     else:
-        st.write(f"**Daily plan for {owner.owner_name} — {day}**")
-        for task in scheduled:
-            time_label = task.start_time if task.start_time else "--"
-            st.write(
-                f"{time_label} — {task.task_name} ({task.pet_name}, "
-                f"{task.duration} min) [priority: {task.priority}]"
-            )
+        st.markdown(f"#### 📅 Daily plan for {owner.owner_name} — {day}")
+
+        planned_minutes = sum(t.duration for t in scheduled)
+        pcol1, pcol2 = st.columns(2)
+        pcol1.metric("Scheduled tasks", len(scheduled))
+        pcol2.metric("Planned time", f"{planned_minutes} min")
+
+        st.table(
+            [
+                {
+                    "Start": task.start_time or "--",
+                    "Task": task.task_name,
+                    "Pet": task.pet_name,
+                    "Duration": f"{task.duration} min",
+                    "Priority": task.priority.capitalize(),
+                }
+                for task in scheduled
+            ]
+        )
+
+        # Surface any overlapping/clashing tasks via conflict_warning().
+        warning = scheduler.conflict_warning(scheduled)
+        if warning:
+            st.warning(warning)
+        else:
+            st.success("No time conflicts. ✅")
+
         st.caption(scheduler.reasoning)

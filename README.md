@@ -66,6 +66,12 @@ pytest --cov
 
 Sample test output:
 
+Daily plan for Zuhaib DADA — Monday
+  07:30 — Feed Cat (Milo, 5 min) [priority: medium]
+  08:00 — Morning Walk (Buddy, 30 min) [priority: high]
+  09:00 — Feed Dog (Buddy, 10 min) [priority: medium]
+Scheduled 3 task(s) for Monday, ordered by start time (untimed tasks placed last).
+
 ```
 # Paste your pytest output here
 
@@ -85,23 +91,24 @@ Confidence Level: ⭐⭐⭐⭐⭐ (5/5 Stars)
 
 ## 📐 Smarter Scheduling
 
-> Fill in once you've implemented scheduling logic.
+PawPal+ does more than list your tasks — it organizes the day for you:
 
-| Feature | Method(s) | Notes |
-|---------|-----------|-------|
-| Task sorting | | e.g., by priority, duration |
-| Filtering | | e.g., skip tasks if time runs out |
-| Conflict handling | | e.g., overlapping time slots |
-| Recurring tasks | | e.g., daily vs. weekly |
+| Feature | What it does for you |
+|---------|----------------------|
+| **Time Sorting** | Arranges tasks earliest to latest. Untimed tasks go to the bottom; tasks at the same time are ordered by priority (high first). |
+| **Pet Filtering** | Show just one pet's tasks, or hide the ones you've already finished. |
+| **Time Budget** | Set how many minutes you have, and PawPal+ keeps your most important tasks first, setting the rest aside. |
+| **Conflict Alerts** | Warns you when two tasks overlap or start at the same time, and whether it's the same pet or different pets. |
+| **Recurring Tasks** | Mark a task daily or weekly. Finish one and the next is scheduled automatically — tomorrow for daily, next week for weekly. |
+| **Plan Explanation** | Every schedule comes with a short summary of what was planned, what got deferred, and any conflicts found. |
+| **Task Management** | Add tasks, edit their time/duration/priority, mark them done, or delete them. |
+| **Pet Management** | Add pets, update their details, or remove them — each pet keeps its own task list. |
 
 ## 📸 Demo Walkthrough
 
-Describe your app in numbered steps so a reader can follow along without watching a video:
-
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
-
-**Screenshot or video** *(optional)*: <!-- Insert a screenshot or link to a demo video here -->
+1. Enter the owner name (e.g. "Jordan").
+2. Type a pet name ("Mochi") and click Add pet.
+3. Fill in a task ("Morning walk", 20 min, high, 08:00), select Mochi, and click Add task.
+4. Add a few more tasks — they appear in the Current tasks table, already sorted by time.
+5. Use the pet/status filters to narrow the view (e.g. just Mochi's pending tasks).
+6. Set the day to "Monday" and click Generate schedule to see today's ordered plan, conflict check, and reasoning.
