@@ -44,6 +44,9 @@ The Owner class manages pet information. The Pet class stores details about each
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
 
+--> Yes. After reviewing the design, I changed the relationships between the classes. Pets now store their own tasks, and Owners store Pet objects instead of only pet names. I made this change because it creates cleaner connections between classes and makes it easier for the Scheduler to access and organize tasks.
+
+I also added start_time and recurrence fields to Task so the system can support scheduling, conflict detection, and recurring tasks.
 ---
 
 ## 2. Scheduling Logic and Tradeoffs
@@ -51,12 +54,22 @@ The Owner class manages pet information. The Pet class stores details about each
 **a. Constraints and priorities**
 
 - What constraints does your scheduler consider (for example: time, priority, preferences)?
+--> Time (start time): tasks are ordered chronologically, and overlap clashes are flagged as conflicts
+--> Priority: breaks ties between tasks and decides who gets kept when time runs short
+--> Time budget : when set, the plan fits high-priority tasks first and defers the rest
+--> Day / recurrence: only tasks due that day survive, daily run every day, weekly/once only on their anchored day
+
 - How did you decide which constraints mattered most?
+--> I ranked constraints by what a pet owner can't compromise on. Priority ranks highest because the whole point is guaranteeing critical care (meds, feeding) happens even on a packed day.
+
 
 **b. Tradeoffs**
 
 - Describe one tradeoff your scheduler makes.
+--> When tasks exceed the owner's time budget, the scheduler keeps the highest priority tasks and drops the rest entirely.
+
 - Why is that tradeoff reasonable for this scenario?
+--> A pet owner cares most that critical care (meds, feeding) always makes the cut, and a simple, predictable "high-priority first" rule is far easier to trust.
 
 ---
 
